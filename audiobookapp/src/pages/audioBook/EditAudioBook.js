@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import AudioBookService from "../../service/AudioBookService";
 
 const EditAudioBook = () => {
@@ -11,7 +11,7 @@ const EditAudioBook = () => {
     const [urlImage, setUrlImage] = useState('');
     const [urlAudio, setUrlAudio] = useState('');
     const [yearOfPublication, setYearOfPublication] = useState('');
-    const history = useNavigate();
+    const history = useHistory();
     const { idAudioBook } = useParams();
     const { audioBook } = useParams();
 
