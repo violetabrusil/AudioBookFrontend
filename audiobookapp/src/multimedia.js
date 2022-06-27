@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/storage"
 import "firebase/compat/firestore"
+import { getAuth } from "firebase/auth";
 
 export const app = firebase.initializeApp({
     "projectId": "fir-multimedia-storage",
@@ -12,3 +13,5 @@ export const app = firebase.initializeApp({
     "messagingSenderId": "1090037862392",
     "measurementId": "G-00ML9HQ5WS"
   });
+
+  export const auth = getAuth(app)
