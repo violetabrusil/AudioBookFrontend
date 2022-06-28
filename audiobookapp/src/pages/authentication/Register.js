@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/authContext"
 import { useHistory } from "react-router-dom"
-
+import { app } from "../../multimedia"
 
 function Register() {
 
@@ -10,25 +10,37 @@ function Register() {
         password: "",
         userName: "",
     });
-
+    const [urlImage, setUrlImage] = useState('');
     const { signUp } = useAuth();
     const navigate = useHistory();
     const [error, setError] = useState();
 
     const handleChange = ({ target: { name, value } }) =>
         setUser({ ...user, [name]: value })
-        console.log(user)
+    console.log(user)
+
+    const imageHandler = async (event) => {
+        const image = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const imagePath = storageRef.child(image.name);
+        await imagePath.put(image);
+        console.log("Imagen cargada: ", image.name);
+        const url = await imagePath.getDownloadURL();
+        setUrlImage(url);
+    }
 
     const handleSubmit = async (event) => {
         setError('');
         event.preventDefault();
         try {
-            await signUp(user.email, user.password, user.userName);
+            await signUp(user.email, user.password, user.userName, urlImage);
             navigate.push('/home')
         } catch (error) {
             setError(error.message);
         }
     };
+
+
 
     return (
         <div className="container">
@@ -62,6 +74,22 @@ function Register() {
                         className="form-control col-4"
                         placeholder="Ingrese un nombre de perfil"
                         onChange={handleChange}></input>
+                </div>
+                <div>
+                    <label>Foto de perfil</label>
+                    <form>
+                        <input
+                            type="file"
+                            onChange={imageHandler} />
+                    </form>
+                    <input
+                        type="text"
+                        className="form-control col-4"
+                        id="urlImage"
+                        value={urlImage}
+                        onChange={(e) => setUrlImage(e.target.value)} 
+                        hidden={true}/>
+
                 </div>
 
                 <div>

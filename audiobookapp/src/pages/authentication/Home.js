@@ -13,7 +13,7 @@ function Home() {
     // }
     return (
         <div>
-            <h1>Bienvenido {user.email}</h1>
+            <h1>Bienvenido {user.userName}</h1>
             {/* <button onClick={() => signOut(auth)}>Salir</button> */}
         </div>
     )

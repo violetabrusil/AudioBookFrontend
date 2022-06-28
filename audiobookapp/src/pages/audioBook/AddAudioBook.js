@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import AudioBookService from "../../service/AudioBookService";
+import { app } from "../../multimedia"
 
 const AddAudioBook = () => {
 
@@ -66,7 +67,27 @@ const AddAudioBook = () => {
                     console.log('Something went wrong', error)
                 });
         }
-    })
+    });
+
+    const imageHandler = async (event) => {
+        const image = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const imagePath = storageRef.child(image.name);
+        await imagePath.put(image);
+        console.log("Imagen cargada: ", image.name);
+        const url = await imagePath.getDownloadURL();
+        setUrlImage(url);
+    }
+
+    const audioHandler = async (event) => {
+        const audio = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const audioPath = storageRef.child(audio.name);
+        await audioPath.put(audio);
+        console.log("Archivo cargado: ", audio.name);
+        const url = await audioPath.getDownloadURL();
+        setUrlAudio(url);
+    }
 
     return (
         <div className="container">
@@ -116,23 +137,35 @@ const AddAudioBook = () => {
 
                 <div>
                     <label>Imagen</label>
+                    <form>
+                        <input
+                        type="file"
+                        onChange={imageHandler}/>
+                    </form>
                     <input
                         type="text"
                         className="form-control col-4"
                         id="urlImage"
                         value={urlImage}
-                        onChange={(e) => setUrlImage(e.target.value)} /> 
+                        onChange={(e) => setUrlImage(e.target.value)}
+                        hidden={true} /> 
 
                 </div>
 
                 <div className="form-group">
                     <label>Audio</label>
+                    <form>
+                        <input
+                        type="file"
+                        onChange={audioHandler}/>
+                    </form>
                     <input
                         type="text"
                         className="form-control col-4"
                         id="urlAudio"
                         value={urlAudio}
-                        onChange={(e) => setUrlAudio(e.target.value)} />
+                        onChange={(e) => setUrlAudio(e.target.value)}
+                        hidden={true} />
 
                 </div>
 

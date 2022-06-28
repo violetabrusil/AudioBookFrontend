@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth"
 import { auth } from "../../src/multimedia"
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
+import { app } from "../multimedia"
 
 export const authcontext = createContext();
 
@@ -14,13 +16,21 @@ function AuthProvider({ children }) {
 
     const [user, setUser] = useState();
     const [loading, setLoading] = useState();
+    const firestore = getFirestore(app);
 
-    const signUp = (email, password, userName, rol) => {
-        const infoUser = createUserWithEmailAndPassword(auth, email, password, userName, 
-            rol).then((userFirebase) => {
-                return userFirebase
+    const signUp = async (email, password, userName, urlImage) => {
+        const rol = "authors"
+        const infoUser = await createUserWithEmailAndPassword(auth, email, password, userName, 
+            rol, urlImage).then((userFirebase) => {
+                console.log(userFirebase.user.uid);
+                return userFirebase.user.uid;
             });
-
+        console.log("user uid",infoUser);
+        const docuRef = doc(firestore, `users/${infoUser}`);
+        console.log("doc", docuRef)
+        setDoc(docuRef, {userName: userName, rol:rol, photo:urlImage});
+        const actualUser = await getDoc(docuRef);
+        console.log("actual user", actualUser);
     };
         
 
