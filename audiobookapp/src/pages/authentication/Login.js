@@ -10,7 +10,7 @@ function Login() {
         password: "",
     });
 
-    const { login } = useAuth();
+    const { login, loginWithGoogle } = useAuth();
     const navigate = useHistory();
     const [error, setError] = useState();
 
@@ -22,11 +22,17 @@ function Login() {
         event.preventDefault();
         try {
             await login(user.email, user.password);
-            navigate.push('/home')
+            navigate.push('/home');
         } catch (error) {
             setError(error.message);
         }
     };
+
+    const handleGoogleSignin = async() => {
+        await loginWithGoogle();
+        navigate.push('/home')
+
+    }
 
     return (
         <div className="container">
@@ -55,6 +61,10 @@ function Login() {
 
                 <div>
                     <button>Ingresar</button>
+                </div>
+
+                <div>
+                    <button onClick={handleGoogleSignin}>Ingresa con Google</button>
                 </div>
             </form>
         </div>
