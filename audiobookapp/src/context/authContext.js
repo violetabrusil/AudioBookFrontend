@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
     createUserWithEmailAndPassword, signInWithEmailAndPassword,
     onAuthStateChanged,
-    getAuth,
     signOut,
     GoogleAuthProvider,
     signInWithPopup
@@ -35,12 +34,12 @@ function AuthProvider({ children }) {
         console.log("user uid", infoUser);
         const docuRef = doc(firestore, `users/${infoUser}`);
         console.log("doc", docuRef)
-        setDoc(docuRef, { userName: userName, rol: rol, photo: urlImage });
+        setDoc(docuRef, { userName: userName, rol: rol, photo: urlImage, email: email});
         const actualUser = await getDoc(docuRef);
         console.log("actual user", actualUser);
     };
 
-    const loginWithGoogle = () =>{
+    const loginWithGoogle = async () =>{
         const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider);
         
@@ -54,21 +53,6 @@ function AuthProvider({ children }) {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             console.log("output User", currentUser)
-            if (currentUser) {
-                      console.log(currentUser.uid)
-                      const uid = currentUser.uid;
-                      const docuRef = doc(firestore, `users/${uid}`);
-                      console.log("referenced",docuRef)
-                        if (docuRef != null){
-                            console.log("doc", docuRef)
-                            setDoc(docuRef, { userName: currentUser.displayName, rol: "author", photo: currentUser.photoURL });
-                            const actualUser = getDoc(docuRef);
-                            console.log("actual user google", actualUser);
-                         }
-                    } else {
-                      // User is signed out
-                      // ...
-                    }
             setLoading(false);
         });
         return () => unsubscribe();

@@ -7,6 +7,7 @@ import Home from "../src/pages/authentication/Home";
 import Login from "../src/pages/authentication/Login";
 import Register from "../src/pages/authentication/Register";
 import AuthProvider from "../src/context/authContext";
+import UserManager from "../src/pages/authentication/UserManager";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/addAudioBook" component={AddAudioBook}></Route>
             <Route path="/updateAudioBook/:idAudioBook/" component={EditAudioBook}></Route>
             <Route path="/searchByIdAudioBook/:idAudioBook" component={AddAudioBook}></Route>
+            <Route path="/userManager" component={UserManager}></Route>
           </Switch>
         </div>
       </Router>

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/authContext"
 import { useHistory } from "react-router-dom"
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
+import { app } from "../../multimedia"
 
 
 function Login() {
@@ -9,6 +11,8 @@ function Login() {
         email: "",
         password: "",
     });
+
+    const firestore = getFirestore(app);
 
     const { login, loginWithGoogle } = useAuth();
     const navigate = useHistory();
@@ -28,8 +32,13 @@ function Login() {
         }
     };
 
-    const handleGoogleSignin = async() => {
-        await loginWithGoogle();
+    const handleGoogleSignin = async () => {
+        const login = await loginWithGoogle();
+        console.log("sign up google", login);
+        console.log(login.user.uid)
+        const uid = login.user.uid;
+        const docuRef = doc(firestore, `users/${uid}`);
+        setDoc(docuRef, { userName: login.user.displayName, rol: "author", photo: login.user.photoURL, email: login.user.email });
         navigate.push('/home')
 
     }
