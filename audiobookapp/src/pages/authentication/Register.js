@@ -15,10 +15,14 @@ function Register() {
     const navigate = useHistory();
     const [error, setError] = useState();
 
+    //Obtiene los valores del formulario
     const handleChange = ({ target: { name, value } }) =>
         setUser({ ...user, [name]: value })
     console.log(user)
 
+    //Carga la imagen de foto de perfil de usuario
+    // a firebase y obtiene la dirección
+    //url para guardar en la base de datos de posgressql
     const imageHandler = async (event) => {
         const image = event.target.files[0];
         const storageRef = app.storage().ref();
@@ -29,6 +33,7 @@ function Register() {
         setUrlImage(url);
     }
 
+    //Llamada a la funcion de registro de usuarios
     const handleSubmit = async (event) => {
         setError('');
         event.preventDefault();
@@ -41,7 +46,7 @@ function Register() {
     };
 
 
-
+    //Diseño de la página para registro
     return (
         <div className="container">
             {error && <p>{error}</p>}

@@ -13,6 +13,7 @@ const EditAudioBook = () => {
     const [yearOfPublication, setYearOfPublication] = useState('');
     const { idAudioBook } = useParams();
 
+    //funcion para guardar un audiolibro
     const saveAudioBook = () => {
         console.log('prueba')
         const audioBook = { titleAudioBook, author, sipnosis, gender, urlImage, urlAudio, yearOfPublication, idAudioBook };

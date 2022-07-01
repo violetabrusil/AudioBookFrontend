@@ -6,9 +6,8 @@ import {
     GoogleAuthProvider,
     signInWithPopup
 } from "firebase/auth"
-import { auth } from "../../src/multimedia"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
-import { app } from "../multimedia"
+import { app , auth} from "../multimedia"
 
 export const authcontext = createContext();
 
@@ -22,10 +21,11 @@ function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const firestore = getFirestore(app);
+    const firestore = getFirestore(app); 
 
+    //función para registrar un usuario
     const signUp = async (email, password, userName, urlImage) => {
-        const rol = "authors"
+        const rol = "author"
         const infoUser = await createUserWithEmailAndPassword(auth, email, password, userName,
             rol, urlImage).then((userFirebase) => {
                 console.log(userFirebase.user.uid);
@@ -34,20 +34,32 @@ function AuthProvider({ children }) {
         console.log("user uid", infoUser);
         const docuRef = doc(firestore, `users/${infoUser}`);
         console.log("doc", docuRef)
-        setDoc(docuRef, { userName: userName, rol: rol, photo: urlImage, email: email});
+        setDoc(docuRef, { userName: userName, rol: rol, photo: urlImage, email: email, access: "true" });
         const actualUser = await getDoc(docuRef);
         console.log("actual user", actualUser);
     };
 
-    const loginWithGoogle = async () =>{
+    //función para login de usuario con cuenta de google
+    const loginWithGoogle = async () => {
         const googleProvider = new GoogleAuthProvider();
         return signInWithPopup(auth, googleProvider);
-        
+
     }
+
+    //función para login de un usuario
     const login = (email, password) =>
         signInWithEmailAndPassword(auth, email, password);
 
+    //función para salir del sistema
     const logout = () => signOut(auth, GoogleAuthProvider);
+
+    //función para obtener el rol de cada usuario que inicie sesión
+    async function getRol(uid) {
+        const docuRef = doc(firestore, `users/${uid}`);
+        const docuCifrada = await getDoc(docuRef);
+        const infoFinal = docuCifrada.data();
+        return infoFinal;
+    }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {

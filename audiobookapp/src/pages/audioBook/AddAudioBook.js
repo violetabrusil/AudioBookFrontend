@@ -15,6 +15,7 @@ const AddAudioBook = () => {
     const history = useHistory();
     const { idAudioBook } = useParams();
 
+    //Función para guardar los audiolibros
     const saveAudioBook = (a) => {
         a.preventDefault();
 
@@ -33,8 +34,6 @@ const AddAudioBook = () => {
         } else {
             const audioBook = { titleAudioBook, author, sipnosis, gender, urlImage, urlAudio, yearOfPublication };
             //create a new record
-
-            console.log(audioBook);
             AudioBookService.addAudioBook(audioBook)
                 .then(response => {
                     console.log('response', response)
@@ -44,14 +43,12 @@ const AddAudioBook = () => {
                 .catch(error => {
                     console.log('Something went wrong', error)
                 });
-
-
-
         }
 
     }
 
     useEffect(() => {
+        //Verifica que el audiolibro ya exista para mostrar la informacion al momento de editar
         if (idAudioBook) {
             AudioBookService.searchByIdAudioBook(idAudioBook)
                 .then(audioBook => {
@@ -69,6 +66,8 @@ const AddAudioBook = () => {
         }
     });
 
+    //Función para cargar la portada del audiolibro y guardarla en 
+    //firebase y obtener su url para guardar en bdd
     const imageHandler = async (event) => {
         const image = event.target.files[0];
         const storageRef = app.storage().ref();
@@ -79,6 +78,8 @@ const AddAudioBook = () => {
         setUrlImage(url);
     }
 
+    //Función para cargar el archivo  mp3 y guardarlo en 
+    //firebase y obtener su url para guardar en bdd
     const audioHandler = async (event) => {
         const audio = event.target.files[0];
         const storageRef = app.storage().ref();
@@ -89,6 +90,7 @@ const AddAudioBook = () => {
         setUrlAudio(url);
     }
 
+    //Diseño de la pantalla para agregar un audiolibro
     return (
         <div className="container">
             <h3>Añadir AudioLibro</h3>
@@ -139,8 +141,8 @@ const AddAudioBook = () => {
                     <label>Imagen</label>
                     <form>
                         <input
-                        type="file"
-                        onChange={imageHandler}/>
+                            type="file"
+                            onChange={imageHandler} />
                     </form>
                     <input
                         type="text"
@@ -148,7 +150,7 @@ const AddAudioBook = () => {
                         id="urlImage"
                         value={urlImage}
                         onChange={(e) => setUrlImage(e.target.value)}
-                        hidden={true} /> 
+                        hidden={true} />
 
                 </div>
 
@@ -156,8 +158,8 @@ const AddAudioBook = () => {
                     <label>Audio</label>
                     <form>
                         <input
-                        type="file"
-                        onChange={audioHandler}/>
+                            type="file"
+                            onChange={audioHandler} />
                     </form>
                     <input
                         type="text"

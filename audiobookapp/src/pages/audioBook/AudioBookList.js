@@ -4,21 +4,48 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactAudioPlayer from "react-audio-player";
 import React from 'react';
 import { Button } from 'primereact/button';
-
 import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { doc, getDoc } from "firebase/firestore";
+import db, { auth } from "../../multimedia";
+import { onAuthStateChanged } from "firebase/auth";
 
 const AudioBooksList = () => {
 
   const [audioBooks, setAudioBooks] = useState([]);
+  const { user, logout } = useAuth();
+
+  const [userCurrent, setUserCurrent] = useState({
+    email: "",
+    photo: "",
+    rol: "",
+    userName: "",
+    access: "",
+  }
+  );
 
   useEffect(() => {
-    init();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        init();
+        getDataUser();
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+
+
   }, [])
 
   const init = () => {
+    //función para obtener toda la lista de audiolibros
     AudioBookService.getAllAudioBooks()
       .then(response => {
         console.log('AudioBooks data', response.data);
@@ -29,6 +56,7 @@ const AudioBooksList = () => {
       })
   }
 
+  //función para eliminar un audiolibro
   const handleDelete = idAudioBook => {
     AudioBookService.deleteAudioBook(idAudioBook)
       .then(response => {
@@ -40,6 +68,8 @@ const AudioBooksList = () => {
       })
   }
 
+  //función para obtener un promedio de todas las reviews
+  //de un audiolibro
   function getReview(reviews) {
     let totalreview = 0;
     reviews.map(review => {
@@ -55,7 +85,20 @@ const AudioBooksList = () => {
     }
 
   }
-  
+
+  const getDataUser = async () => {
+    const docRef = doc(db, "users", user.uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("existe", docSnap.data())
+      setUserCurrent(docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  }
+
+
   return (
     <div className="container ">
       <h3>Manejador de audiolibros</h3>
@@ -110,6 +153,8 @@ const AudioBooksList = () => {
       </div>
     </div>
   );
+
+
 }
 
 export default AudioBooksList;

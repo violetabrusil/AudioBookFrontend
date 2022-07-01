@@ -18,9 +18,11 @@ function Login() {
     const navigate = useHistory();
     const [error, setError] = useState();
 
+    //Obtener valores del usuario del formulario
     const handleChange = ({ target: { name, value } }) =>
         setUser({ ...user, [name]: value })
 
+    //llamada a al función para que el usuario inicie sesión
     const handleSubmit = async (event) => {
         setError('');
         event.preventDefault();
@@ -32,17 +34,23 @@ function Login() {
         }
     };
 
+    //llamada a la funcion para que el usuario inicie sesión con su cuenta de google
     const handleGoogleSignin = async () => {
         const login = await loginWithGoogle();
         console.log("sign up google", login);
         console.log(login.user.uid)
         const uid = login.user.uid;
         const docuRef = doc(firestore, `users/${uid}`);
-        setDoc(docuRef, { userName: login.user.displayName, rol: "author", photo: login.user.photoURL, email: login.user.email });
+        const docuCifrada = await getDoc(docuRef);
+        const infoFinal = docuCifrada.data();
+        if(!infoFinal){
+            setDoc(docuRef, { userName: login.user.displayName, rol: "author", photo: login.user.photoURL, email: login.user.email, access: "true" });
+        }
         navigate.push('/home')
 
     }
 
+    //Diseño de login
     return (
         <div className="container">
             {error && <p>{error}</p>}

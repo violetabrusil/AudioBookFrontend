@@ -9,6 +9,7 @@
             <Link to="#" className='menu-bars'>
                 <FaIcons.FaBars/>
             </Link>
+            <h1>hola</h1>
 
         </div>
         </>
