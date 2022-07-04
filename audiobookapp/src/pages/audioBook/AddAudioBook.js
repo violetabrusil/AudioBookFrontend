@@ -137,8 +137,14 @@ const AddAudioBook = () => {
 
                 </div>
 
-                <div>
+                <div className="form-group">
                     <label>Imagen</label>
+                    <div>
+                        <img
+                            src={urlImage}
+                            width="113" height="150"
+                        />
+                    </div>
                     <form>
                         <input
                             type="file"

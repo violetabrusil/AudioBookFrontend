@@ -72,7 +72,7 @@ const EditAudioBook = () => {
 
     }, [])
 
- 
+
 
     return (
         <div className="container">
@@ -123,15 +123,15 @@ const EditAudioBook = () => {
                 <div >
                     <label>Imagen</label>
                     <div>
-                            <img
-                               
-                                width="113" height="150"
-                                />
-                        </div>
-                    <input
-                            type="file"
-                            onChange={imageHandler}
+                        <img
+                            src={urlImage}
+                            width="113" height="150"
                         />
+                    </div>
+                    <input
+                        type="file"
+                        onChange={imageHandler}
+                    />
                     <input
                         type="text"
                         className="form-control col-4"
@@ -144,11 +144,11 @@ const EditAudioBook = () => {
 
                 <div className="form-group">
                     <label>Audio</label>
-                 
-                        <input
-                            type="file"
-                            onChange={audioHandler} />
-                    
+
+                    <input
+                        type="file"
+                        onChange={audioHandler} />
+
                     <input
                         type="text"
                         className="form-control col-4"
