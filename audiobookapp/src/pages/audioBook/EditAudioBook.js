@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import AudioBookService from "../../service/AudioBookService";
-
+import { app } from "../../multimedia"
 const EditAudioBook = () => {
 
     const [titleAudioBook, setTitleAudioBook] = useState('');
@@ -29,6 +29,30 @@ const EditAudioBook = () => {
             ])
     };
 
+    //Función para cargar la portada del audiolibro y guardarla en 
+    //firebase y obtener su url para guardar en bdd
+    const imageHandler = async (event) => {
+        const image = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const imagePath = storageRef.child(image.name);
+        await imagePath.put(image);
+        console.log("Imagen cargada: ", image.name);
+        const url = await imagePath.getDownloadURL();
+        setUrlImage(url);
+    }
+
+    //Función para cargar el archivo  mp3 y guardarlo en 
+    //firebase y obtener su url para guardar en bdd
+    const audioHandler = async (event) => {
+        const audio = event.target.files[0];
+        const storageRef = app.storage().ref();
+        const audioPath = storageRef.child(audio.name);
+        await audioPath.put(audio);
+        console.log("Archivo cargado: ", audio.name);
+        const url = await audioPath.getDownloadURL();
+        setUrlAudio(url);
+    }
+
     useEffect(() => {
         if (idAudioBook) {
             AudioBookService.searchByIdAudioBook(idAudioBook)
@@ -45,8 +69,10 @@ const EditAudioBook = () => {
                     console.log('Something went wrong', error)
                 });
         }
-        
-    },[])
+
+    }, [])
+
+ 
 
     return (
         <div className="container">
@@ -59,8 +85,8 @@ const EditAudioBook = () => {
                         type="text"
                         className="form-control col-4"
                         id="titleAudioBook"
-                        value={titleAudioBook} 
-                        onChange={(e) => setTitleAudioBook(e.target.value)}/>
+                        value={titleAudioBook}
+                        onChange={(e) => setTitleAudioBook(e.target.value)} />
                 </div>
 
                 <div className="form-group">
@@ -69,8 +95,8 @@ const EditAudioBook = () => {
                         type="text"
                         className="form-control col-4"
                         id="author"
-                        value={author} 
-                        onChange={(e) => setAuthor(e.target.value)}/>
+                        value={author}
+                        onChange={(e) => setAuthor(e.target.value)} />
                 </div>
 
                 <div className="form-group">
@@ -94,25 +120,42 @@ const EditAudioBook = () => {
 
                 </div>
 
-                <div className="form-group">
+                <div >
                     <label>Imagen</label>
+                    <div>
+                            <img
+                               
+                                width="113" height="150"
+                                />
+                        </div>
+                    <input
+                            type="file"
+                            onChange={imageHandler}
+                        />
                     <input
                         type="text"
                         className="form-control col-4"
                         id="urlImage"
-                        value={urlImage} 
-                        onChange={(e) => setUrlImage(e.target.value)}/>
+                        value={urlImage}
+                        onChange={(e) => setUrlImage(e.target.value)}
+                        hidden={true} />
 
                 </div>
 
                 <div className="form-group">
                     <label>Audio</label>
+                 
+                        <input
+                            type="file"
+                            onChange={audioHandler} />
+                    
                     <input
                         type="text"
                         className="form-control col-4"
                         id="urlAudio"
                         value={urlAudio}
-                        onChange={(e) => setUrlAudio(e.target.value)} />
+                        onChange={(e) => setUrlAudio(e.target.value)}
+                        hidden={true} />
 
                 </div>
 
@@ -122,8 +165,8 @@ const EditAudioBook = () => {
                         type="text"
                         className="form-control col-4"
                         id="yearOfPublication"
-                        value={yearOfPublication} 
-                        onChange={(e) => setYearOfPublication(e.target.value)}/>
+                        value={yearOfPublication}
+                        onChange={(e) => setYearOfPublication(e.target.value)} />
 
                 </div>
 

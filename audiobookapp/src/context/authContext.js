@@ -53,14 +53,6 @@ function AuthProvider({ children }) {
     //función para salir del sistema
     const logout = () => signOut(auth, GoogleAuthProvider);
 
-    //función para obtener el rol de cada usuario que inicie sesión
-    async function getRol(uid) {
-        const docuRef = doc(firestore, `users/${uid}`);
-        const docuCifrada = await getDoc(docuRef);
-        const infoFinal = docuCifrada.data();
-        return infoFinal;
-    }
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);

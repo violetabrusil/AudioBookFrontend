@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/authContext"
 import { doc, getDoc } from "firebase/firestore"
 import db, {app} from "../../multimedia"
-import UserManager from "../authentication/UserManager";
+import UserManager from "../informationUser/UserManager";
 import AudioBooksList from "../audioBook/AudioBookList";
-import { onAuthStateChanged } from "firebase/auth";
 import { getAuth } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -65,6 +65,7 @@ function Home() {
                     <div>
                         <h1>Bienvenido {userCurrent.userName}</h1>
                         <button onClick={handleLogout}>Salir</button>
+                        <Link className="btn btn-info" to={'/editProfile'}>Editar perfil</Link>
                         <AudioBooksList />
                     </div>
                 )
