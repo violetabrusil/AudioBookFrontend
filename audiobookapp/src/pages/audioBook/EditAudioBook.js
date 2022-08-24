@@ -117,7 +117,6 @@ const EditAudioBook = () => {
                         id="gender"
                         value={gender}
                         onChange={(e) => setGender(e.target.value)} />
-
                 </div>
 
                 <div >
@@ -139,7 +138,6 @@ const EditAudioBook = () => {
                         value={urlImage}
                         onChange={(e) => setUrlImage(e.target.value)}
                         hidden={true} />
-
                 </div>
 
                 <div className="form-group">
@@ -156,7 +154,6 @@ const EditAudioBook = () => {
                         value={urlAudio}
                         onChange={(e) => setUrlAudio(e.target.value)}
                         hidden={true} />
-
                 </div>
 
                 <div className="form-group">
@@ -167,7 +164,6 @@ const EditAudioBook = () => {
                         id="yearOfPublication"
                         value={yearOfPublication}
                         onChange={(e) => setYearOfPublication(e.target.value)} />
-
                 </div>
 
                 <div>

@@ -47,7 +47,7 @@ function Login() {
             setDoc(docuRef, { userName: login.user.displayName, rol: "author", photo: login.user.photoURL, email: login.user.email, access: "true" });
         }
         navigate.push('/home')
-
+        
     }
 
     //Diseño de login

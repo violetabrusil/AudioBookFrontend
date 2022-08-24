@@ -17,6 +17,7 @@ const AudioBooksList = () => {
 
   const [audioBooks, setAudioBooks] = useState([]);
   const { user, logout } = useAuth();
+  const [userId] = useState([]);
 
   const [userCurrent, setUserCurrent] = useState({
     email: "",
@@ -29,7 +30,7 @@ const AudioBooksList = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user.uid) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         init();
@@ -44,12 +45,22 @@ const AudioBooksList = () => {
 
   }, [])
 
+
+
   const init = () => {
     //función para obtener toda la lista de audiolibros
+    const books = [];
+   
     AudioBookService.getAllAudioBooks()
       .then(response => {
         console.log('AudioBooks data', response.data);
-        setAudioBooks(response.data);
+        response.data.map(book => {
+          console.log("book", book)
+          if(user.uid === book.userId) {
+            books.push(book);
+          }
+        })
+        setAudioBooks(books);
       })
       .catch(error => {
         console.log('Algo salio mal', error)

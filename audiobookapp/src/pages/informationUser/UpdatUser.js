@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { query, collection, where, getDoc, getDocs, updateDoc, doc } from "firebase/firestore"
-import db from "../../multimedia"
+import { query, collection, where, getDoc, getDocs, updateDoc, doc } from "firebase/firestore";
+import db from "../../multimedia";
 import { Button } from 'primereact/button';
 import { useAuth } from "../../context/authContext";
 import { app } from "../../multimedia";
