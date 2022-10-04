@@ -1,13 +1,86 @@
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.error-msg {
+  font-size: 12px;
+  width: 100%;
+  color: red;
+}
+
+.error-back {
+  font-size: 12px;
+  width: 100%;
+  background-color: #EC7063;
+  color: white;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
 body {
-  margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  align-items: center;
+  height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.box {
+  border: 1px solid #dfdfdf;
+  background-color: #fff;
+}
+
+.g-btn {
+  background-image: url("../src/images/google.png");
+  background-repeat: no-repeat;
+  background-position: left 15px center;
+  width: 70% !important;
+  height: 38px !important;
+  font-size: 15px !important;
+  border-radius: 13px;
+  color: white;
+  background-color: #2E9AFE;
+  border-color: #2E9AFE;
+  border-width: 0px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.g-btn>div,
+.g-btn>div>svg {
+  width: 40px !important;
+  height: 38px !important;
+}
+
+.field {
+  width: 350px;
+}
+
+.btn-login {
+  width: 70% !important;
+  height: 38px !important;
+  font-size: 15px !important;
+  border-radius: 13px;
+  color: white;
+  background-color: #1D8348;
+  border-color: #1D8348;
+  border-width: 0px;
+  font-weight: bold;
+}
+
+.div-style {
+  padding-top: 10px;
+  text-align: center;
 }

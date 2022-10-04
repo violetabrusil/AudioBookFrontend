@@ -112,7 +112,7 @@ const AudioBooksList = () => {
 
   return (
     <div className="container ">
-      <h3>Manejador de audiolibros</h3>
+      <h3>Mi Biblioteca</h3>
       <div>
         <Link to="/addAudioBook" className="btn btn-primary mb-2">Añadir AudioLibro</Link>
         <table className="table table-bordered table-striped ">

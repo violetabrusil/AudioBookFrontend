@@ -60,6 +60,7 @@ function UserManager() {
                         <tr>
                             <th>Nombre de usuario</th>
                             <th>Email</th>
+                            <th>Rol</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -69,6 +70,7 @@ function UserManager() {
                                 <tr key={user.id}>
                                     <td>{user.userName}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.rol}</td>
                                     <td>
                                         {user.access === "false" ? <Button label="Habilitar" className="p-button-raised p-button-rounded" onClick={
                                             () => enableDisableAccount(user.id, "true")
