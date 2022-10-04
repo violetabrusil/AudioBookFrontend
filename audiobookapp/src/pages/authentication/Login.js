@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/authContext"
 import { useHistory } from "react-router-dom"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
@@ -20,12 +20,7 @@ function Login() {
     const initialValues = { email: "", password: "" };
     const [formValues, setFormVaLues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-
-
-    //Obtener valores del usuario del formulario
-    /* const handleChange = ({ target: { name, value } }) =>
-         setUser({ ...user, [name]: value })*/
+    const [setIsSubmit] = useState(false);
 
     //Obtener valores del usuario del formulario
     const handleChange = (e) => {
@@ -67,13 +62,7 @@ function Login() {
 
     }
 
-    useEffect(() => {
-        if (Object.keys(formErrors).length === 0 && isSubmit) {
-            console.log(formValues);
-        }
-    }, [formErrors, formValues]);
-
-    //función para validar que el email sea válido
+    //función para validar que el email y password sean válidos
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -100,8 +89,8 @@ function Login() {
             <form onSubmit={handleSubmit}>
 
                 <h2 style={{ textAlign: "center" }}>Iniciar sesión</h2>
+                <hr />
                 <div className="ui divider"></div>
-                <br></br>
                 <div className="body">
                     <div className="field">
                         <label>Email</label>
