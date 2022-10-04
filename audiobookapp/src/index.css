@@ -74,8 +74,8 @@ body {
   font-size: 15px !important;
   border-radius: 13px;
   color: white;
-  background-color: #1D8348;
-  border-color: #1D8348;
+  background-color: #073B3A;
+  border-color: #073B3A;
   border-width: 0px;
   font-weight: bold;
 }
@@ -106,8 +106,8 @@ body {
   font-size: 15px !important;
   border-radius: 13px;
   color: white;
-  background-color: #1D8348;
-  border-color: #1D8348;
+  background-color: #073B3A;
+  border-color: #073B3A;
   border-width: 0px;
   font-weight: bold;
 }
@@ -129,4 +129,54 @@ body {
 .div-style-tw {
   padding-top: 20px;
   text-align: center;
+}
+.body-home {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  align-items: center;
+  height: 79vh;
+}
+.flex-parent-element {
+  display: flex;
+  width: 50%;
+}
+
+.flex-child-element {
+  flex: 1;
+  margin-right: -85px;
+}
+
+.flex-child-element:first-child {
+  margin-right: 20px;
+}
+.btn-logout {
+  width: 55% !important;
+  height: 38px !important;
+  font-size: 17px !important;
+  border-radius: 6px;
+  color: white;
+  background-color: #313638;
+  border-color: #313638;
+  border-width: 0px;
+  font-weight: bold;
+}
+thead {
+	background-color: #2b2c28;
+	color: white;
+	font-size: 0.875rem;
+	letter-spacing: 2%;
+}
+
+.btn-save {
+  width: 55% !important;
+  height: 38px !important;
+  font-size: 15px !important;
+  border-radius: 13px;
+  color: white;
+  background-color: #1D8348;
+  border-color: #1D8348;
+  border-width: 0px;
+  font-weight: bold;
 }

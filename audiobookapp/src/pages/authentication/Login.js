@@ -36,7 +36,6 @@ function Login() {
         setError('');
         event.preventDefault();
         setFormErrors(validate(formValues));
-        setIsSubmit(true);
         try {
 
             await login(user.email, user.password);

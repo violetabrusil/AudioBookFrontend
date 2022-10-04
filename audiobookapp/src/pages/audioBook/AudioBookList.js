@@ -12,6 +12,7 @@ import { useAuth } from "../../context/authContext";
 import { doc, getDoc } from "firebase/firestore";
 import db, { auth } from "../../multimedia";
 import { onAuthStateChanged } from "firebase/auth";
+import Table from 'react-bootstrap/Table';
 
 const AudioBooksList = () => {
 
@@ -50,13 +51,13 @@ const AudioBooksList = () => {
   const init = () => {
     //función para obtener toda la lista de audiolibros
     const books = [];
-   
+
     AudioBookService.getAllAudioBooks()
       .then(response => {
         console.log('AudioBooks data', response.data);
         response.data.map(book => {
           console.log("book", book)
-          if(user.uid === book.userId) {
+          if (user.uid === book.userId) {
             books.push(book);
           }
         })
@@ -113,54 +114,78 @@ const AudioBooksList = () => {
   return (
     <div className="container ">
       <h3>Mi Biblioteca</h3>
+
       <div>
-        <Link to="/addAudioBook" className="btn btn-primary mb-2">Añadir AudioLibro</Link>
-        <table className="table table-bordered table-striped ">
-          <thead className="thead-dark">
+        <div>
+          <Link to="/addAudioBook" className="btn btn-primary mb-2" style={{
+            fontWeight: "bold", color: "white",
+            backgroundColor: "#0B6E4F", borderColor: "#0B6E4F"
+          }}>Añadir AudioLibro</Link>
+        </div>
+
+        <Table striped bordered hover>
+          <thead>
             <tr>
               <th>Título</th>
               <th>Autor</th>
               <th>Imagen</th>
               <th>Audio mp3</th>
               <th>Género</th>
-              <th>Año de publicación</th>
+              <th>Año</th>
               <th>Sipnosis</th>
               <th>Reseña</th>
               <th>Acciones</th>
             </tr>
           </thead>
+          <tbody>
+            {
+              audioBooks.map(audioBook => (
+                <tr key={audioBook.idAudioBook}>
+                  <td>{audioBook.titleAudioBook}</td>
+                  <td>{audioBook.author}</td>
+                  <td>
+                    <img
+                      src={audioBook.urlImage}
+                      width="113" height="150" />
+                  </td>
+                  <td>
+                    <ReactAudioPlayer src={audioBook.urlAudio} autoPlay controls />
+                  </td>
+                  <td>{audioBook.gender}</td>
+                  <td>{audioBook.yearOfPublication}</td>
+                  <td style={{ textAlign: "justify" }}>{audioBook.sipnosis}</td>
+                  <td>{getReview(audioBook.reviews)}</td>
 
-          {
-            audioBooks.map(audioBook => (
-              <tr key={audioBook.idAudioBook}>
-                <td>{audioBook.titleAudioBook}</td>
-                <td>{audioBook.author}</td>
-                <td>
-                  <img
-                    src={audioBook.urlImage}
-                    width="113" height="150" />
-                </td>
-                <td>
-                  <ReactAudioPlayer src={audioBook.urlAudio} autoPlay controls />
-                </td>
-                <td>{audioBook.gender}</td>
-                <td>{audioBook.yearOfPublication}</td>
-                <td>{audioBook.sipnosis}</td>
-                <td>{getReview(audioBook.reviews)}</td>
+                  <td>
+                    <div style={{ paddingTop: "35px" }}>
+                      <div style={{ textAlign: "center" }}>
+                        <Link className="btn btn-info" to={`/updateAudioBook/${audioBook.idAudioBook}`} style={{
+                          fontWeight: "bold", color: "white",
+                          backgroundColor: "#6BBF59", borderColor: "#6BBF59", width: "100%"
+                        }}>Editar</Link>
+                      </div>
 
-                <td>
-                  {/* <Button label="Editar" to={`/updateAudioBook/${audioBook.idAudioBook}`} className="p-button-raised p-button-rounded" /> */}
-                  <Link className="btn btn-info" to={`/updateAudioBook/${audioBook.idAudioBook}`}>Editar</Link>
-                  <Button label="Eliminar" className="p-button-raised p-button-rounded" onClick={(a) => {
-                    handleDelete(audioBook.idAudioBook)
-                  }} />
-                </td>
-              </tr>
+                      <div style={{ textAlign: "center", paddingTop: "10px" }}>
+                        <Button label="Eliminar" style={{
+                          height: "40px", color: "white",
+                          backgroundColor: "#cc444b", borderColor: "#cc444b"
+                        }}
+                          onClick={(a) => {
+                            handleDelete(audioBook.idAudioBook)
+                          }} />
+                      </div>
 
-            ))
-          }
+                    </div>
+                  </td>
+                </tr>
 
-        </table>
+              ))
+            }
+
+
+          </tbody>
+
+        </Table>
       </div>
     </div>
   );

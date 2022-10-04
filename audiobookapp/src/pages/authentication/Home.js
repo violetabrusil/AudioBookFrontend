@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/authContext"
 import { doc, getDoc } from "firebase/firestore"
-import db, {app} from "../../multimedia"
+import db, { app } from "../../multimedia"
 import UserManager from "../informationUser/UserManager";
 import AudioBooksList from "../audioBook/AudioBookList";
 import { getAuth } from "firebase/auth";
@@ -54,20 +54,47 @@ function Home() {
         if (userCurrent.access === "true") {
             if (userCurrent.rol === "admin") {
                 return (
-                    <div>
-                        <h1>Bienvenido {userCurrent.userName}</h1>
+                    <div className="body-home">
+                        <div>
+                            <h1>Bienvenido {userCurrent.userName}</h1>
+                        </div>
+
                         <button onClick={handleLogout}>Salir</button>
                         <UserManager />
                     </div>
                 )
             } if (userCurrent.rol === "author") {
                 return (
-                    <div>
-                        <h1>Bienvenido {userCurrent.userName}</h1>
-                        <button onClick={handleLogout}>Salir</button>
-                        <Link className="btn btn-info" to={'/editProfile'}>Editar perfil</Link>
-                        <AudioBooksList />
+                    <div className="body-home">
+
+                        <div className="flex-parent-element col-12">
+
+                            <div className="flex-child-element magenta col-7">
+                                <h1>Bienvenido {userCurrent.userName}</h1>
+                            </div>
+
+                            <div className="col-2"></div>
+
+                            <div className="flex-child-element green col-2">
+                                <Link className="btn btn-info" to={'/editProfile'} style={{
+                                    fontWeight: "bold", color: "white",
+                                    backgroundColor: "#08A045", borderColor: "#08A045"
+                                }}>Editar perfil</Link>
+                            </div>
+
+                            <div className="flex-child-element magenta col-2">
+                                <button className="btn-logout" onClick={handleLogout}>Salir</button>
+                            </div>
+
+                        </div>
+                        <br></br>              
+                        <div>
+                            <AudioBooksList />
+
+                        </div>
+
                     </div>
+
                 )
             }
 
