@@ -45,7 +45,7 @@ function Register() {
  
         try {
             await signUp(user.email, user.password, user.userName, urlImage);
-            navigate.push('/home')
+            navigate.push('/login')
         } catch (error) {
             setError(error.message);
         }
@@ -63,12 +63,12 @@ function Register() {
         if (!values.password) {
             errors.password = "La contraseña es requerida"
         } else if (values.password.length < 8) {
-            errors.password = "La contraseña debe tener más de 8 caracteres"
+            errors.password = "La contraseña debe tener 8 caracteres"
         }
         if (!values.userName) {
             errors.userName = "El nombre de usuario es requerido"
-        } else if (values.userName.length < 10) {
-            errors.userName = "El nombre de usuario debe tener al menos 10 caracteres"
+        } else if (values.userName.length <= 8) {
+            errors.userName = "El nombre de usuario debe tener al menos 8 caracteres"
         }
         return errors;
     };

@@ -6,7 +6,7 @@ import {
     GoogleAuthProvider,
     signInWithPopup
 } from "firebase/auth"
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
+import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { app , auth} from "../multimedia"
 
 export const authcontext = createContext();
@@ -32,7 +32,6 @@ function AuthProvider({ children }) {
             });
         const docuRef = doc(firestore, `users/${infoUser}`);
         setDoc(docuRef, { userName: userName, rol: rol, photo: urlImage, email: email, access: "true" });
-        const actualUser = await getDoc(docuRef);
     };
 
     //función para login de usuario con cuenta de google

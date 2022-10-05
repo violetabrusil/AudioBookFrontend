@@ -17,10 +17,8 @@ import Table from 'react-bootstrap/Table';
 const AudioBooksList = () => {
 
   const [audioBooks, setAudioBooks] = useState([]);
-  const { user, logout } = useAuth();
-  const [userId] = useState([]);
-
-  const [userCurrent, setUserCurrent] = useState({
+  const { user } = useAuth();
+  const [ setUserCurrent] = useState({
     email: "",
     photo: "",
     rol: "",
@@ -65,6 +63,8 @@ const AudioBooksList = () => {
         console.log('Algo salio mal', error)
       })
   }
+
+  
 
   //función para eliminar un audiolibro
   const handleDelete = idAudioBook => {

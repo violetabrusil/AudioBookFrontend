@@ -20,8 +20,7 @@ function Home() {
         access: "",
     }
     );
-    const auth = getAuth(app);
-
+   
     //Función para salir del sistema
     const handleLogout = async () => {
         await logout();
@@ -72,7 +71,7 @@ function Home() {
                                 <h1>Bienvenido {userCurrent.userName}</h1>
                             </div>
 
-                            <div className="col-1"></div>
+                    
 
                             <div className="col-2">
                                 <Link className="btn btn-info" to={'/editProfile'} style={{
@@ -81,7 +80,7 @@ function Home() {
                                 }}>Editar perfil</Link>
                             </div>
 
-                            <div className="col-2" style={{marginLeft: "-6%"}}>
+                            <div className="col-2" style={{marginLeft: "1%"}}>
                                 <button className="btn-logout" onClick={handleLogout}>Salir</button>
                             </div>
 

@@ -20,7 +20,6 @@ function Login() {
     const initialValues = { email: "", password: "" };
     const [formValues, setFormVaLues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
-    const [setIsSubmit] = useState(false);
 
     //Obtener valores del usuario del formulario
     const handleChange = (e) => {
@@ -68,8 +67,8 @@ function Login() {
         }
         if (!values.password) {
             errors.password = "La contraseña es requerida"
-        } else if (values.password.length < 8) {
-            errors.password = "La contraseña debe tener más de 8 caracteres"
+        } else if (values.password !== user.password) {
+            errors.password = "La contraseña es incorrecta"
         }
         return errors;
     };

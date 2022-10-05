@@ -4,7 +4,6 @@ import db from "../../multimedia";
 import { Button } from 'primereact/button';
 import { app } from "../../multimedia";
 import { doc, setDoc, getDoc, getFirestore } from "firebase/firestore";
-import { useHistory } from "react-router-dom"
 import { useAuth } from "../../context/authContext"
 
 function UserManager() {
@@ -22,7 +21,7 @@ function UserManager() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(
             (doc) => {
-                if (doc.data().rol != "admin") {
+                if (doc.data().rol !== "admin") {
                     postData.push({ ...doc.data(), id: doc.id });
                 }
 
