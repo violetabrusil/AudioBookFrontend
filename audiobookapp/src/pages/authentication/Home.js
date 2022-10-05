@@ -38,7 +38,6 @@ function Home() {
             const docRef = doc(db, "users", user.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                console.log("existe", docSnap.data())
                 setUserCurrent(docSnap.data());
             } else {
                 // doc.data() will be undefined in this case
@@ -69,20 +68,20 @@ function Home() {
 
                         <div className="flex-parent-element col-12">
 
-                            <div className="flex-child-element magenta col-7">
+                            <div className="col-8">
                                 <h1>Bienvenido {userCurrent.userName}</h1>
                             </div>
 
-                            <div className="col-2"></div>
+                            <div className="col-1"></div>
 
-                            <div className="flex-child-element green col-2">
+                            <div className="col-2">
                                 <Link className="btn btn-info" to={'/editProfile'} style={{
                                     fontWeight: "bold", color: "white",
                                     backgroundColor: "#08A045", borderColor: "#08A045"
                                 }}>Editar perfil</Link>
                             </div>
 
-                            <div className="flex-child-element magenta col-2">
+                            <div className="col-2" style={{marginLeft: "-6%"}}>
                                 <button className="btn-logout" onClick={handleLogout}>Salir</button>
                             </div>
 

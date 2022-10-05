@@ -27,9 +27,7 @@ function Login() {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value })
         setFormVaLues({ ...formValues, [name]: value });
-        console.log(formValues);
     }
-
 
     //llamada a al función para que el usuario inicie sesión
     const handleSubmit = async (event) => {
@@ -48,8 +46,6 @@ function Login() {
     //llamada a la funcion para que el usuario inicie sesión con su cuenta de google
     const handleGoogleSignin = async () => {
         const login = await loginWithGoogle();
-        console.log("sign up google", login);
-        console.log(login.user.uid)
         const uid = login.user.uid;
         const docuRef = doc(firestore, `users/${uid}`);
         const docuCifrada = await getDoc(docuRef);
@@ -68,7 +64,6 @@ function Login() {
         if (!values.email) {
             errors.email = "El email es requerido"
         } else if (!regex.test(values.email)) {
-            console.log("ingresa")
             errors.email = "El email no tiene un formato valido"
         }
         if (!values.password) {

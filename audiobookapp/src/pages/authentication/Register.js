@@ -17,14 +17,12 @@ function Register() {
     const initialValues = { email: "", password: "", userName: "" };
     const [formValues, setFormVaLues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
-    const [setIsSubmit] = useState(false);
 
     //Obtiene los valores del formulario
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value })
         setFormVaLues({ ...formValues, [name]: value });
-        console.log(formValues);
     }
 
     //Carga la imagen de foto de perfil de usuario
@@ -35,7 +33,6 @@ function Register() {
         const storageRef = app.storage().ref();
         const imagePath = storageRef.child(image.name);
         await imagePath.put(image);
-        console.log("Imagen cargada: ", image.name);
         const url = await imagePath.getDownloadURL();
         setUrlImage(url);
     }
@@ -61,7 +58,6 @@ function Register() {
         if (!values.email) {
             errors.email = "El email es requerido"
         } else if (!regex.test(values.email)) {
-            console.log("ingresa")
             errors.email = "El email no tiene un formato valido"
         }
         if (!values.password) {

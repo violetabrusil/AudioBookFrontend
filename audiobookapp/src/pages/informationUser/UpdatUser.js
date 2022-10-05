@@ -26,7 +26,6 @@ function UpdateUser() {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log('user', docSnap.data())
             setUserCurrent(docSnap.data());
         } else {
             console.log("No such document!");
@@ -49,7 +48,6 @@ function UpdateUser() {
         const storageRef = app.storage().ref();
         const imagePath = storageRef.child(image.name);
         await imagePath.put(image);
-        console.log("Imagen cargada: ", image.name);
         const url = await imagePath.getDownloadURL();
         setProfilePhoto(url);
     };
@@ -83,9 +81,9 @@ function UpdateUser() {
     if (userCurrent.userName && userCurrent.photo) {
         return (
             <div className="container">
-                <h1>Editar Información</h1>
+                <h3 style={{ textAlign: "center" }}>Editar Información</h3>
+                <hr></hr>
                 <form>
-
                     <div style={{ textAlign: "center" }}>
 
                         <div className="div-style-tw">

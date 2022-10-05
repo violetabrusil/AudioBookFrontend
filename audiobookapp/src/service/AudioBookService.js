@@ -1,11 +1,13 @@
 import httpClient from '../http-common';
 
+const router = "http://localhost:8080"
+
 const getAllAudioBooks = () => {
-    return httpClient.get('http://localhost:8080/api/audioBook/getAllAudioBooks');
+    return httpClient.get(`${router}/api/audioBook/getAllAudioBooks`);
 }
 
 const addAudioBook = (data) => {
-    console.log('data', data)
+    
     return httpClient.post('http://localhost:8080/api/audioBook/addAudioBook',data)
 }
 

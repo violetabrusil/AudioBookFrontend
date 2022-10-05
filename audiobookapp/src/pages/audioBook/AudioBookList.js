@@ -54,9 +54,7 @@ const AudioBooksList = () => {
 
     AudioBookService.getAllAudioBooks()
       .then(response => {
-        console.log('AudioBooks data', response.data);
         response.data.map(book => {
-          console.log("book", book)
           if (user.uid === book.userId) {
             books.push(book);
           }
@@ -73,6 +71,7 @@ const AudioBooksList = () => {
     AudioBookService.deleteAudioBook(idAudioBook)
       .then(response => {
         console.log('Audiobook deleted succesfully', response.data);
+        alert("El audiolibro fue eliminado exitosamente")
         init();
       })
       .catch(error => {
@@ -88,9 +87,7 @@ const AudioBooksList = () => {
       totalreview += parseInt(review.rating)
     })
     let result = totalreview / reviews.length
-    console.log('result', result)
     if (Number.isNaN(result)) {
-      console.log('aqui')
       return 'Not reviewed'
     } else {
       return result
@@ -102,7 +99,6 @@ const AudioBooksList = () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      console.log("existe", docSnap.data())
       setUserCurrent(docSnap.data());
     } else {
       // doc.data() will be undefined in this case
@@ -149,7 +145,7 @@ const AudioBooksList = () => {
                       width="113" height="150" />
                   </td>
                   <td>
-                    <ReactAudioPlayer src={audioBook.urlAudio} autoPlay controls />
+                    <ReactAudioPlayer src={audioBook.urlAudio} controls />
                   </td>
                   <td>{audioBook.gender}</td>
                   <td>{audioBook.yearOfPublication}</td>

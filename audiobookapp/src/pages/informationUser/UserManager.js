@@ -22,10 +22,8 @@ function UserManager() {
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach(
             (doc) => {
-                console.log("document", doc.data())
                 if (doc.data().rol != "admin") {
                     postData.push({ ...doc.data(), id: doc.id });
-                    console.log("element", doc.id, " => ", doc.data());
                 }
 
             }

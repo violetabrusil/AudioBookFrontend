@@ -16,10 +16,13 @@
     "react-audio-player": "^0.17.0",
     "react-bootstrap": "^2.0.2",
     "react-dom": "^18.2.0",
+    "react-google-button": "0.7.2",
     "react-icons": "^4.4.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "react-google-button": "0.7.2"
+    "react-select": "^5.4.0",
+    "reactjs-alert": "^2.2.0",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
