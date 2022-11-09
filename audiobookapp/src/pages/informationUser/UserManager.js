@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { app } from "../../multimedia";
 import { doc, setDoc, getDoc, getFirestore } from "firebase/firestore";
 import { useAuth } from "../../context/authContext"
+import Table from 'react-bootstrap/Table';
 
 function UserManager() {
 
@@ -51,10 +52,11 @@ function UserManager() {
     return (
         <div className="container ">
             <h3>Usuarios Registrados</h3>
+
             <div>
-                <table className="table table-bordered table-striped ">
+                <Table striped bordered hover>
                     <thead className="thead-dark">
-                        <tr>
+                        <tr style={{textAlign: "center"}}>
                             <th>Nombre de usuario</th>
                             <th>Email</th>
                             <th>Rol</th>
@@ -68,12 +70,25 @@ function UserManager() {
                                     <td>{user.userName}</td>
                                     <td>{user.email}</td>
                                     <td>{user.rol}</td>
-                                    <td>
-                                        {user.access === "false" ? <Button label="Habilitar" className="p-button-raised p-button-rounded" onClick={
-                                            () => enableDisableAccount(user.id, "true")
-                                        } /> : <Button label="Deshabilitar" className="p-button-raised p-button-rounded" onClick={
-                                            () => enableDisableAccount(user.id, "false")
-                                        } />}
+                                    <td >
+                                        <div style={{ textAlign: "center" }}>
+
+                                            {user.access === "false" ? <Button label="Habilitar"
+                                                style={{
+                                                    height: "40px", color: "white", backgroundColor: "#10b981", borderColor: "#10b981",
+                                                    width: "135px"
+                                                }}
+                                                onClick={
+                                                    () => enableDisableAccount(user.id, "true")
+                                                } /> : <Button label="Deshabilitar" style={{
+                                                    height: "40px", color: "white", backgroundColor: "#E7204E", borderColor: "#E7204E"
+                                                }}
+                                                    onClick={
+                                                        () => enableDisableAccount(user.id, "false")
+                                                    } />}
+
+                                        </div>
+
 
 
                                     </td>
@@ -81,7 +96,7 @@ function UserManager() {
                             ))
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
     );

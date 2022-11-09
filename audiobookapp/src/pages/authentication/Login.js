@@ -104,7 +104,7 @@ function Login() {
                             type="password"
                             name="password"
                             className="form-control col-4"
-                            placeholder="Crea una contraseña"
+                            placeholder="Cree una contraseña"
                             value={formValues.password}
                             onChange={handleChange}
                         ></input>

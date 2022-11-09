@@ -2,6 +2,7 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/storage"
 import "firebase/compat/firestore"
 import { getAuth } from "firebase/auth";
+import {initializeFirestore} from 'firebase/firestore';
 
 export const app = firebase.initializeApp({
   "projectId": "fir-multimedia-storage",
@@ -16,5 +17,10 @@ export const app = firebase.initializeApp({
 
 export const auth = getAuth(app);
 
-const db = firebase.firestore();
+
+const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true,
+});
+
+
 export default db;

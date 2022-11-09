@@ -99,7 +99,9 @@ const AudioBooksList = () => {
     const docRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setUserCurrent(docSnap.data());
+      console.log("existe", docSnap.data())
+      setUserCurrent(docSnap.data);
+
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");

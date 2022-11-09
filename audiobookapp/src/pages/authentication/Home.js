@@ -20,7 +20,7 @@ function Home() {
         access: "",
     }
     );
-   
+
     //Función para salir del sistema
     const handleLogout = async () => {
         await logout();
@@ -52,13 +52,24 @@ function Home() {
         if (userCurrent.access === "true") {
             if (userCurrent.rol === "admin") {
                 return (
-                    <div className="body-home">
-                        <div>
-                            <h1>Bienvenido {userCurrent.userName}</h1>
+                    <div className="body-home col-12">
+
+                        <div className="flex-parent-element col-12">
+
+                            <div className="col-10">
+                                <h1>Bienvenido {userCurrent.userName}</h1>
+                            </div>
+
+                            <div className="col-2">
+                                <button className="btn-logout" onClick={handleLogout}>Salir</button>
+                            </div>
+
                         </div>
 
-                        <button onClick={handleLogout}>Salir</button>
-                        <UserManager />
+                        <div>
+                            <UserManager />
+                        </div>
+
                     </div>
                 )
             } if (userCurrent.rol === "author") {
@@ -67,25 +78,25 @@ function Home() {
 
                         <div className="flex-parent-element col-12">
 
-                            <div className="col-8">
+                            <div className="col-8" style={{ width: "70.666667%" }}>
                                 <h1>Bienvenido {userCurrent.userName}</h1>
                             </div>
 
-                    
 
-                            <div className="col-2">
+
+                            <div className="col-2" style={{ width: "18.666667%" }}>
                                 <Link className="btn btn-info" to={'/editProfile'} style={{
                                     fontWeight: "bold", color: "white",
                                     backgroundColor: "#08A045", borderColor: "#08A045"
                                 }}>Editar perfil</Link>
                             </div>
 
-                            <div className="col-2" style={{marginLeft: "1%"}}>
+                            <div className="col-2" style={{ marginLeft: "1%" }}>
                                 <button className="btn-logout" onClick={handleLogout}>Salir</button>
                             </div>
 
                         </div>
-                        <br></br>              
+                        <br></br>
                         <div>
                             <AudioBooksList />
 

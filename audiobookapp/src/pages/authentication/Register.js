@@ -14,7 +14,7 @@ function Register() {
     const { signUp } = useAuth();
     const navigate = useHistory();
     const [error, setError] = useState();
-    const initialValues = { email: "", password: "", userName: "" };
+    const initialValues = { email: "", password: "", userName: ""};
     const [formValues, setFormVaLues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
 
@@ -123,6 +123,7 @@ function Register() {
                         <div>
                             <input
                                 type="file"
+                                accept="image/png, image/jpg, image/jpeg"
                                 onChange={imageHandler} />
                         </div>
 
