@@ -31,8 +31,6 @@ const AddAudioBook = () => {
             .catch(error => {
                 console.log('Something went wrong', error)
             });
-
-
     }
 
     useEffect(() => {
@@ -99,6 +97,7 @@ const AddAudioBook = () => {
                             type="text"
                             className="form-control col-4"
                             id="titleAudioBook"
+                            maxlength="30"
                             value={titleAudioBook}
                             onChange={(e) => setTitleAudioBook(e.target.value)} />
                     </div>
@@ -109,6 +108,7 @@ const AddAudioBook = () => {
                             type="text"
                             className="form-control col-4"
                             id="author"
+                            maxlength="20"
                             value={author}
                             onChange={(e) => setAuthor(e.target.value)} />
                     </div>
@@ -123,7 +123,8 @@ const AddAudioBook = () => {
                             className="form-control col-4"
                             id="sipnosis"
                             value={sipnosis}
-                            onChange={(e) => setSipnosis(e.target.value)} />
+                            onChange={(e) => setSipnosis(e.target.value)}
+                            style={{textAlign: "justify"}} />
                     </div>
 
                     <div className="form-group" style={{paddingTop: "10px"}}>
