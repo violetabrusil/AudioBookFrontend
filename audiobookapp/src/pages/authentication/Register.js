@@ -42,7 +42,6 @@ function Register() {
         setError('');
         event.preventDefault();
         setFormErrors(validate(formValues));
- 
         try {
             await signUp(user.email, user.password, user.userName, urlImage);
             navigate.push('/login')
@@ -57,18 +56,18 @@ function Register() {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
         if (!values.email) {
             errors.email = "El email es requerido"
-        } else if (!regex.test(values.email)) {
+        } if (!regex.test(values.email)) {
             errors.email = "El email no tiene un formato valido"
         }
         if (!values.password) {
             errors.password = "La contraseña es requerida"
-        } else if (values.password.length < 8) {
-            errors.password = "La contraseña debe tener 8 caracteres"
+        } if (values.password.length >= 8) {
+            errors.password = "La contraseña debe tener máximo 8 caracteres"
         }
         if (!values.userName) {
             errors.userName = "El nombre de usuario es requerido"
-        } else if (values.userName.length <= 8) {
-            errors.userName = "El nombre de usuario debe tener al menos 8 caracteres"
+        } if (values.userName.length >= 8) {
+            errors.userName = "El nombre de usuario debe tener máximo 8 caracteres"
         }
         return errors;
     };

@@ -5,6 +5,7 @@ import { Button } from 'primereact/button';
 import { useAuth } from "../../context/authContext";
 import { app } from "../../multimedia";
 import { useHistory } from "react-router-dom";
+import profileDefault from "../../images/profileDefault.png"
 
 function UpdateUser() {
 
@@ -76,22 +77,36 @@ function UpdateUser() {
         setProfilePhoto(event.target.value)
     };
 
-
-
-    if (userCurrent.userName && userCurrent.photo) {
+    if (userCurrent.userName || userCurrent.photo) {
         return (
             <div className="container">
                 <h3 style={{ textAlign: "center" }}>Editar Información</h3>
                 <hr></hr>
                 <form>
                     <div style={{ textAlign: "center" }}>
+                        {userCurrent.photo === '' ? (
+                            <div className="div-style-tw">
+                                <img
+                                    src={profileDefault}
+                                    width="100" height="100"
+                                />
+                            </div>
 
-                        <div className="div-style-tw">
-                            <img
-                                src={profilePhoto}
-                                width="113" height="150"
-                            />
-                        </div>
+
+                        ) : (
+                            <div className="div-style-tw">
+                                <img
+                                    src={profilePhoto}
+                                    width="113" height="150"
+                                />
+                            </div>
+
+
+
+                        )}
+
+
+
                         <div className="div-style-tw">
                             <input
                                 type="file"

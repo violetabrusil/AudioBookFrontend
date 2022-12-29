@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom"
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore"
 import { app } from "../../multimedia"
 import { Link } from "react-router-dom";
+import iconAudity from "../../images/iconAudity.png"
 
 function Login() {
 
@@ -75,11 +76,20 @@ function Login() {
 
     //Diseño de login
     return (
+        
         <div className="container">
 
+          <br></br>
+          <br></br>
+
             {error && <div className="error-back">{error}</div>}
-            <br></br>
+     
             <form onSubmit={handleSubmit}>
+
+                <div className="div-1">
+                    <img src={iconAudity}/>
+                </div>
+                <br></br>
 
                 <h2 style={{ textAlign: "center" }}>Iniciar sesión</h2>
                 <hr />

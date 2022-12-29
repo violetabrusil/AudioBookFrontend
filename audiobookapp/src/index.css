@@ -19,6 +19,8 @@ code {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  margin: 0 50px 50px 0;
+
 }
 
 body {
@@ -191,4 +193,13 @@ thead {
 .col-12 {
   flex: 0 0 auto;
   width: 90%;
+}
+
+.div-1 {
+  background-color: #383B3A;
+  height: 40%;
+  width:  40%;
+  text-align: center;
+  border-radius: 30px;
+  margin: 95px 0 0 95px;
 }

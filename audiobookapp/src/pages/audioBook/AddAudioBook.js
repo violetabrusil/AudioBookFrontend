@@ -97,7 +97,7 @@ const AddAudioBook = () => {
                             type="text"
                             className="form-control col-4"
                             id="titleAudioBook"
-                            maxlength="30"
+                            maxlength="50"
                             value={titleAudioBook}
                             onChange={(e) => setTitleAudioBook(e.target.value)} />
                     </div>
