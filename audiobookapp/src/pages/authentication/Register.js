@@ -10,11 +10,14 @@ function Register() {
         password: "",
         userName: "",
     });
+    var errorEmail = "";
+    var errorName = "";
+    var errorPassword = "";
     const [urlImage, setUrlImage] = useState('');
     const { signUp } = useAuth();
     const navigate = useHistory();
     const [error, setError] = useState();
-    const initialValues = { email: "", password: "", userName: ""};
+    const initialValues = { email: "", password: "", userName: "" };
     const [formValues, setFormVaLues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
 
@@ -41,12 +44,18 @@ function Register() {
     const handleSubmit = async (event) => {
         setError('');
         event.preventDefault();
-        setFormErrors(validate(formValues));
-        try {
-            await signUp(user.email, user.password, user.userName, urlImage);
-            navigate.push('/login')
-        } catch (error) {
-            setError(error.message);
+        const errorValidate = validate(formValues)
+        setFormErrors(errorValidate);
+    
+        if (errorEmail !== undefined && errorPassword !== undefined && errorName!== undefined) {
+            console.log("entra aqui")
+            try {
+                await signUp(user.email, user.password, user.userName, urlImage);
+                navigate.push('/login')
+            } catch (error) {
+                setError(error.message);
+            }
+
         }
     };
 
@@ -54,21 +63,35 @@ function Register() {
     const validate = (values) => {
         const errors = {};
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        if (!values.email) {
+        console.log("valores", values)
+        if (values.email === "" ) {
             errors.email = "El email es requerido"
-        } if (!regex.test(values.email)) {
+            errorEmail = undefined
+            console.log("entra")
+        } else if (!regex.test(values.email)) {
             errors.email = "El email no tiene un formato valido"
-        }
-        if (!values.password) {
+            errorEmail = undefined
+        } 
+        
+        if (values.password === "") {
             errors.password = "La contraseña es requerida"
-        } if (values.password.length >= 8) {
+            errorPassword = undefined
+        } else if (values.password.length > 8) {
+            console.log("entra valor1", values.password)
             errors.password = "La contraseña debe tener máximo 8 caracteres"
-        }
-        if (!values.userName) {
+            errorPassword = undefined
+        } 
+        
+        if (values.userName === "") {
             errors.userName = "El nombre de usuario es requerido"
-        } if (values.userName.length >= 8) {
+            errorName = undefined
+        } else if (values.userName.length > 8) {
+            console.log("entra valor2", values.userName)
             errors.userName = "El nombre de usuario debe tener máximo 8 caracteres"
+            errorName = undefined
         }
+        console.log("erorr", errors)
+   
         return errors;
     };
 
