@@ -55,7 +55,6 @@ function Register() {
             } catch (error) {
                 setError(error.message);
             }
-
         }
     };
 
@@ -77,7 +76,6 @@ function Register() {
             errors.password = "La contraseña es requerida"
             errorPassword = undefined
         } else if (values.password.length > 8) {
-            console.log("entra valor1", values.password)
             errors.password = "La contraseña debe tener máximo 8 caracteres"
             errorPassword = undefined
         } 
@@ -86,7 +84,6 @@ function Register() {
             errors.userName = "El nombre de usuario es requerido"
             errorName = undefined
         } else if (values.userName.length > 8) {
-            console.log("entra valor2", values.userName)
             errors.userName = "El nombre de usuario debe tener máximo 8 caracteres"
             errorName = undefined
         }

@@ -44,8 +44,6 @@ const AudioBooksList = () => {
 
   }, [])
 
-
-
   const init = () => {
     //función para obtener toda la lista de audiolibros
     const books = [];
@@ -63,8 +61,6 @@ const AudioBooksList = () => {
         console.log('Algo salio mal', error)
       })
   }
-
-  
 
   //función para eliminar un audiolibro
   const handleDelete = idAudioBook => {
