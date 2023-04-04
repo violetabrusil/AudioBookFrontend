@@ -114,7 +114,7 @@ const AddAudioBook = () => {
                     </div>
 
                     <div className="form-group" style={{paddingTop: "10px"}}>
-                        <label>Sipnosis</label>
+                        <label>Sinopsis</label>
                         <textarea
                             name="paragraph_text"
                             cols="50"

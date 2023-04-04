@@ -126,7 +126,7 @@ const AudioBooksList = () => {
               <th>Audio mp3</th>
               <th>Género</th>
               <th>Año</th>
-              <th>Sipnosis</th>
+              <th>Sinopsis</th>
               <th>Reseña</th>
               <th>Acciones</th>
             </tr>
